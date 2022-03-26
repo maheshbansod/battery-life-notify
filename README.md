@@ -1,10 +1,6 @@
 # batterylifenotify
 
-This repository contains the timer I use to notify me when my laptop battery is less than 40 and the charger unplugged or more than 80 and the charger plugged in.  
-
-I have copied some of it off of random sources and edited it as per my needs - for an Arch system running `dwm` and using `notify-send`.  
-
-You may have to do the same if you plan on using it.  
+This repository contains the timer I use to notify me when my laptop battery is less than 40 and the charger unplugged or more than 80 and the charger plugged in.
 
 ## Requirements
 - Systemd
@@ -12,19 +8,21 @@ You may have to do the same if you plan on using it.
 - A way to find out the capacity and status of your battery.
 
 ## Configuration and customization
+The file `config.cfg` can be used to configure it.  
+Modify the variables as you see fit.
+Currently, it includes the variables
+```BELOWFILE
+ABOVEFILE
+MIN
+MAX
+BATTERY_DIR
+LOW_BATTERY_MESSAGE
+HIGH_BATTERY_MESSAGE
+```
 
-**TL;DR** do it manually - edit `batterylifenotify`
+Feel free to edit the file `batterylifenotify` using which you can use your preferred notification utility if it's other than `notify-send` .
 
-You may edit the file `batterylifenotify` to make it fit your system,  
-Some things you might want to configure are:
-- if your battery info is in other files
-- you want to use another command to find out the capacity or the status
-- You use a utility other than `notify-send` for your notifications
-
-Or you may want to customise
-- the messages you get as notification
-- make it notify if the battery level is below 30 instead of 40
-- literally anything else - it's all in the file `batterylifenotify`.
+// TODO: maybe edit this after creating the installation script
 
 ## Usage and installation
 I plan to write a small script for this in the near future. For now you have:
@@ -32,6 +30,7 @@ I plan to write a small script for this in the near future. For now you have:
 - Copy the `*.timer` and `*.service` file to `~/.config/systemd/user/` i.e. the path where you keep your user level units.  
 See note below why we are putting it in the user level and not in /etc/systemd/..
 - Copy the file `batterylifenotify` to `/usr/bin`
+- Copy the configuration file `config.cfg` to `~/.config/batterylifenotify/config.cfg`
 - Enable and start the timer
 ```
 systemctl --user enable batterylifenotify.timer
